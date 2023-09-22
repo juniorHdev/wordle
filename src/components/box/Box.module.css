@@ -1,0 +1,20 @@
+.box {
+  display: grid;
+  place-content: center;
+  width: 4.6875rem;
+  aspect-ratio: 1/1;
+  margin: 0.25rem;
+  border: 1px solid black;
+}
+
+.correct {
+  background-color: green;
+}
+
+.almost {
+  background-color: yellow;
+}
+
+.incorrect {
+  background-color: gray;
+}
