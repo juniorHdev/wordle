@@ -5,6 +5,8 @@
   aspect-ratio: 1/1;
   margin: 0.25rem;
   border: 1px solid black;
+
+  text-transform: uppercase;
 }
 
 .correct {

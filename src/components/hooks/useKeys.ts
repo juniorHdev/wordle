@@ -16,7 +16,7 @@ export const useWord = (onEnter: ()=>void) => {
                 onEnter();
                 setWord('');
             }
-            else if (/[a-zA-Z]/.test(key) && word.length <=5 && key !== 'Backspace') {
+            else if (/[a-zA-Z]/.test(key) && word.length < 5 && key !== 'Backspace' && key !== 'Enter') {               
                 setWord((prevWord) => prevWord + key);
             }
         };

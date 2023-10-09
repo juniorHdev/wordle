@@ -1,31 +1,27 @@
-
-import { useState } from "react"
-import { RowEmpty } from "../rows"
-import { WriteRow } from "../rows/WriteRow"
-import styles from "./Table.module.css"
-import { useWord } from "../hooks/useKeys"
-import { ConfirmRow } from "../rows/ConfirmRow"
+import { RowEmpty } from "../rows";
+import { WriteRow } from "../rows/WriteRow";
+import styles from "./Table.module.css";
+import { ConfirmRow } from "../rows/ConfirmRow";
+import useGameContext from "../context/GameContext";
 
 function Table() {
-  const [tries , setTries ] = useState(5)
-  const  [answer, setAnswer] = useState<string[]>([])
-  const word = useWord(handlerOnEnter)
-
-
-  function handlerOnEnter() {
-    if (word.length == 5) {
-      setAnswer(current => [...current, word])
-      const newTries = tries - 1
-      setTries(newTries)
-    }
-  }
+  const { word, answers, tries, wordDay } = useGameContext();
 
   return (
-    <div className={styles.table}>
-      { answer.map((item, index) => <ConfirmRow key={index} wordDay="maria" word={item}/>)}
-        <WriteRow word={word}/>
-        { Array(tries).fill('').map((_, index) =>  (<RowEmpty key={index} />)) }
-    </div>
-  )
+    <>
+      <div> intentos restatantes {tries}</div>
+      <div className={styles.table}>
+        {answers.map((item, index) => (
+          <ConfirmRow key={index} wordDay={wordDay} word={item} />
+        ))}
+        {tries > 0 ? <WriteRow word={word} /> : null}
+        {tries > 1
+          ? Array(tries - 1)
+              .fill("")
+              .map((_, index) => <RowEmpty key={index} />)
+          : null}
+      </div>
+    </>
+  );
 }
-export default Table
+export default Table;
